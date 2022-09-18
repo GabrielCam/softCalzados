@@ -15,7 +15,7 @@ public class Defecto {
     private int id;
 
     @OneToMany
-
+// uno a muchos 
 
     @Enumerated(EnumType.STRING)
     @Getter @Setter @Column(name = "tipoDefecto")
