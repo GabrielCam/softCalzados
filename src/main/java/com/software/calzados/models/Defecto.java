@@ -8,10 +8,13 @@ import javax.persistence.*;
 @Entity(name = "defecto")
 public class Defecto {
 
+//    hola loco
     @Id
     @Getter @Setter @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @OneToMany
 
 
     @Enumerated(EnumType.STRING)
