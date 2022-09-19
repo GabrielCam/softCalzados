@@ -16,7 +16,7 @@ public class Color {
     @Getter @Setter @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int codigo;
-    
+
     @Getter @Setter @Column(name = "descripcion")
     private String descripcion;
 
