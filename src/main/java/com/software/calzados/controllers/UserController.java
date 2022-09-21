@@ -18,6 +18,7 @@ public class UserController {
     public List<Usuario> getUsuarios(){
         return usuarioDao.getUsuarios();
     }
+
     @RequestMapping(value = "api/usuarios",method = RequestMethod.POST)
     public void newUsuarios(@RequestBody Usuario usuario){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);

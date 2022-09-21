@@ -17,10 +17,10 @@ public class Defecto {
     private int id;
 
 
+
     @Enumerated(EnumType.STRING)
     @Getter @Setter @Column(name = "tipoDefecto")
     private TipoDefecto tipoDefecto;
-
 
     @Getter @Setter @Column(name = "descripcion")
     private String descripcion;
