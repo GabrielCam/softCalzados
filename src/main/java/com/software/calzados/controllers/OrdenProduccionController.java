@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class OrdenProduccionController {
     @Autowired
@@ -16,6 +18,12 @@ public class OrdenProduccionController {
     public void newOrdenProduccion(@RequestBody OrdenProduccion ordenProduccion){
         ordenProduccionDao.newOrdenProduccion(ordenProduccion);
     }
+
+    @RequestMapping(value = "api/ordenproduccion/libres")
+    public List<OrdenProduccion> getOrdenProduccionLibre(){
+        return ordenProduccionDao.getOrdenProduccionLibre();
+    }
+
 }
 /* POST http://localhost:8080/api/ordenproduccion
 * {

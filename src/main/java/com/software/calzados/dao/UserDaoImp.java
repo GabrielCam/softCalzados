@@ -42,6 +42,7 @@ public class UserDaoImp implements UsuarioDao{
     public void newUsuario(Usuario usuario) {
         entityManager.merge(usuario);
     }
+
     public boolean login(Usuario usuario){
         String query = "FROM Usuario WHERE email = :email";
         List<Usuario> lista =  entityManager.createQuery(query)
@@ -50,7 +51,6 @@ public class UserDaoImp implements UsuarioDao{
         if (lista.isEmpty()){
             return false;
         }
-
         String passwordHashed = lista.get(0).getPassword();
 
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);

@@ -6,10 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "color")
 @Table(name ="color")
-
-
 public class Color {
 
     @Id

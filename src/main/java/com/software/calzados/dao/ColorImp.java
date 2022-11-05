@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -14,7 +15,14 @@ public class ColorImp implements ColorDao{
     private EntityManager entityManager;
 
     @Override
-    public void newColor(Color color){entityManager.merge(color);}
+    public void newColor(Color color){
+        entityManager.merge(color);
+    }
+
+    @Override
+    public List<Color> getColores() {
+        return entityManager.createQuery("FROM color").getResultList();
+    }
 }
 
 

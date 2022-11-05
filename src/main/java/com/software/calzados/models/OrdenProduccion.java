@@ -26,8 +26,16 @@ public class OrdenProduccion {
     private Estado estado;
 
     @ManyToOne
-    @Getter @Setter
+    @Getter @Setter @JoinColumn(name = "modelo_id")
     private Modelo modelo;
+
+    @ManyToOne
+    @Getter @Setter @JoinColumn(name = "color_id")
+    private Color color;
+
+    @OneToOne
+    @Getter @Setter @JoinColumn(name = "linea_id")
+    private Linea linea;
 
 
 }
