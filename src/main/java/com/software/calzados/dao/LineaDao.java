@@ -8,4 +8,6 @@ public interface LineaDao {
     public List<Linea> getLineas();
 
     public void newLinea(Linea linea);
+
+    public List<Linea> getLibres();
 }

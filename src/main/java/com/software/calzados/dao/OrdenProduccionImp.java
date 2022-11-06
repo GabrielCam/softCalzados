@@ -22,9 +22,9 @@ public class OrdenProduccionImp implements OrdenProduccionDao {
         entityManager.merge(ordenProduccion);
     }
 
-    @Override
-    public List<OrdenProduccion> getOrdenProduccionLibre() {
-       TypedQuery<OrdenProduccion> query = entityManager.createQuery("SELECT o FROM OrdenProduccion o WHERE estado != 'INICIADA'",OrdenProduccion.class);
-        return query.getResultList();
-    }
+//    @Override
+//    public List<OrdenProduccion> getOrdenProduccionLibre() {
+//       TypedQuery<OrdenProduccion> query = entityManager.createQuery("SELECT o FROM OrdenProduccion o WHERE estado != 'INICIADA'",OrdenProduccion.class);
+//        return query.getResultList();
+//    }
 }

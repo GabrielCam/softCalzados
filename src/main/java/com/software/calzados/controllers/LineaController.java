@@ -26,4 +26,9 @@ public class LineaController {
     public void newLinea(@RequestBody Linea linea){
         lineaDao.newLinea(linea);
     }
+
+    @RequestMapping(value = "api/linea/libres")
+    public void getLibres(){
+        lineaDao.getLibres();
+    }
 }

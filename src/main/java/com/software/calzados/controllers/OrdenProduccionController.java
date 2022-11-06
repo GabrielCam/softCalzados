@@ -19,10 +19,10 @@ public class OrdenProduccionController {
         ordenProduccionDao.newOrdenProduccion(ordenProduccion);
     }
 
-    @RequestMapping(value = "api/ordenproduccion/libres")
-    public List<OrdenProduccion> getOrdenProduccionLibre(){
-        return ordenProduccionDao.getOrdenProduccionLibre();
-    }
+//    @RequestMapping(value = "api/ordenproduccion/libres")
+//    public List<OrdenProduccion> getOrdenProduccionLibre(){
+//        return ordenProduccionDao.getOrdenProduccionLibre();
+//    }
 
 }
 /* POST http://localhost:8080/api/ordenproduccion

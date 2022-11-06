@@ -7,5 +7,5 @@ import java.util.List;
 public interface OrdenProduccionDao {
     public void newOrdenProduccion(OrdenProduccion ordenProduccion);
 
-    public List<OrdenProduccion> getOrdenProduccionLibre();
+//    public List<OrdenProduccion> getOrdenProduccionLibre();
 }
