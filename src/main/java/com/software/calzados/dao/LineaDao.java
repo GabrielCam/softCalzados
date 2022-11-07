@@ -7,7 +7,7 @@ import java.util.List;
 public interface LineaDao {
     public List<Linea> getLineas();
 
-    public void newLinea(Linea linea);
+    public Linea newLinea(Linea linea);
 
     public List<Linea> getLibres();
 }

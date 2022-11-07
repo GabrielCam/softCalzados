@@ -2,6 +2,8 @@ package com.software.calzados.dao;
 
 import com.software.calzados.models.Linea;
 import com.software.calzados.models.OrdenProduccion;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,19 +17,19 @@ public class LineaImp implements LineaDao{
     private EntityManager entityManager;
 
     @Override
+    public Linea newLinea(Linea linea) {
+        return entityManager.merge(linea);
+    }
+
+    @Override
     public List<Linea> getLineas() {
         String query = "SELECT l FROM linea l";
+
         return entityManager.createQuery(query).getResultList();
     }
 
     @Override
-    public void newLinea(Linea linea) {
-        entityManager.merge(linea);
-    }
-
-    @Override
     public List<Linea> getLibres() {
-        TypedQuery<Linea> query = entityManager.createQuery("SELECT l FROM linea l WHERE estadoDeLinea = 'DISPONIBLE'",Linea.class);
-        return query.getResultList();
+       return entityManager.createQuery("SELECT l FROM linea l where estadoDeLinea = 'DISPONIBLE'").getResultList();
     }
 }

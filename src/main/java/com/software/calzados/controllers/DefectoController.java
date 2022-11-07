@@ -4,18 +4,40 @@ import com.software.calzados.dao.DefectoDao;
 import com.software.calzados.models.Defecto;
 import com.software.calzados.models.TipoDefecto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "api")
 public class DefectoController {
     @Autowired
     private DefectoDao defectoDao;
 
-    @RequestMapping(value = "api/defecto")
-    public void newDefecto(@RequestBody Defecto defecto) {
-        defectoDao.newDefecto(defecto);
+    @PostMapping(value = "/defecto")
+    public ResponseEntity<Defecto> newDefecto(@RequestBody Defecto defecto) {
+        try {
+           Defecto defecto1 = defectoDao.newDefecto(defecto);
+           return new ResponseEntity<>(defecto1,HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/defecto/{id}")
+    public ResponseEntity<Defecto> getDefectoById(@PathVariable int id) {
+        try {
+            Optional<Defecto> defecto = Optional.ofNullable(defectoDao.getDefectoById(id));
+            if (defecto.isPresent()) {
+                return new ResponseEntity<>(defecto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
    /* todo ...tipo POST

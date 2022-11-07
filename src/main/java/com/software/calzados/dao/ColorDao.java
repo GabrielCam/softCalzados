@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ColorDao {
-    public void newColor(Color color);
+    public Color newColor(Color color);
+
     public List<Color> getColores();
 }

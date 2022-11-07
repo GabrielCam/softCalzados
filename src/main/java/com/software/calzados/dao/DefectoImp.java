@@ -10,12 +10,17 @@ import javax.persistence.PersistenceContext;
 
 @Repository
 @Transactional
-public class DefectoImp implements DefectoDao{
+public class DefectoImp implements DefectoDao {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void newDefecto(Defecto defecto){
-       entityManager.merge(defecto);
+    public Defecto newDefecto(Defecto defecto) {
+        return entityManager.merge(defecto);
+    }
+
+    @Override
+    public Defecto getDefectoById(int id) {
+        return entityManager.find(Defecto.class, id);
     }
 }

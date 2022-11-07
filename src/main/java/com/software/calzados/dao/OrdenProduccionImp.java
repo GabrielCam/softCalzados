@@ -1,13 +1,11 @@
 package com.software.calzados.dao;
 
 import com.software.calzados.models.OrdenProduccion;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -18,8 +16,14 @@ public class OrdenProduccionImp implements OrdenProduccionDao {
     private EntityManager entityManager;
 
     @Override
-    public void newOrdenProduccion(OrdenProduccion ordenProduccion) {
-        entityManager.merge(ordenProduccion);
+    public OrdenProduccion newOrdenProduccion(OrdenProduccion ordenProduccion) {
+        return entityManager.merge(ordenProduccion);
+    }
+
+    @Override
+    public List<OrdenProduccion> getOrdenProduccion() {
+        String query = "SELECT o FROM OrdenProduccion o";
+        return entityManager.createQuery(query).getResultList();
     }
 
 //    @Override

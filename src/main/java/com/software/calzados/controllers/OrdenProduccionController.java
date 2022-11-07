@@ -3,26 +3,41 @@ package com.software.calzados.controllers;
 import com.software.calzados.dao.OrdenProduccionDao;
 import com.software.calzados.models.OrdenProduccion;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "api")
 public class OrdenProduccionController {
     @Autowired
     private OrdenProduccionDao ordenProduccionDao;
 
-    @RequestMapping(value = "api/ordenproduccion")
-    public void newOrdenProduccion(@RequestBody OrdenProduccion ordenProduccion){
-        ordenProduccionDao.newOrdenProduccion(ordenProduccion);
+    @PostMapping(value = "/ordenproduccion")
+    public ResponseEntity<OrdenProduccion> newOrdenProduccion(@RequestBody OrdenProduccion ordenProduccion) {
+        try {
+            OrdenProduccion ordenProduccion1 = ordenProduccionDao.newOrdenProduccion(ordenProduccion);
+            return new ResponseEntity<>(ordenProduccion1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-//    @RequestMapping(value = "api/ordenproduccion/libres")
-//    public List<OrdenProduccion> getOrdenProduccionLibre(){
-//        return ordenProduccionDao.getOrdenProduccionLibre();
-//    }
+    @GetMapping(value = "/ordenproduccion")
+    public ResponseEntity<List<OrdenProduccion>> getOrdenProduccion() {
+        try {
+            List<OrdenProduccion> ordenProduccions = ordenProduccionDao.getOrdenProduccion();
+            if (ordenProduccions.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(ordenProduccions, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
 /* POST http://localhost:8080/api/ordenproduccion

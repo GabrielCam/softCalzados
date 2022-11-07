@@ -3,24 +3,41 @@ package com.software.calzados.controllers;
 import com.software.calzados.dao.ColorDao;
 import com.software.calzados.models.Color;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "api")
 public class ColorController {
     @Autowired
     private ColorDao colorDao;
-    @RequestMapping(value = "api/color",method = RequestMethod.POST)
-    public void newColor(@RequestBody Color color){
-        colorDao.newColor(color);
+
+    @PostMapping(value = "/color")
+    public ResponseEntity<Color> newColor(@RequestBody Color color) {
+        try {
+            Color color1 = colorDao.newColor(color);
+            return new ResponseEntity<>(color1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
-    @RequestMapping(value = "api/color",method = RequestMethod.GET)
-    public List<Color> getColor(){
-        return colorDao.getColores();
+
+    @GetMapping(value = "/color")
+    public ResponseEntity<List<Color>> getColor() {
+        try {
+            List<Color> colores = colorDao.getColores();
+            if (colores.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(colores, HttpStatus.OK);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

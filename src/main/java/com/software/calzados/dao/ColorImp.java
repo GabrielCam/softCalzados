@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ColorImp implements ColorDao{
+public class ColorImp implements ColorDao {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void newColor(Color color){
-        entityManager.merge(color);
+    public Color newColor(Color color) {
+        return entityManager.merge(color);
     }
 
     @Override

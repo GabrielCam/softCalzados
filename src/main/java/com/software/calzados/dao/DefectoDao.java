@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface DefectoDao {
-    public void newDefecto(Defecto defecto);
+    public Defecto newDefecto(Defecto defecto);
 
-    }
+    public Defecto getDefectoById(int id);
+}
 

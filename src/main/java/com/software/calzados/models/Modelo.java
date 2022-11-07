@@ -5,7 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "modelo")
+@Table(name = "modelo")
 public class Modelo {
     @Id
     @Getter @Setter @GeneratedValue(strategy = GenerationType.IDENTITY)

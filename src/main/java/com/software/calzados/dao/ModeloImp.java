@@ -6,15 +6,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 @Transactional
-public class ModeloImp implements ModeloDao{
+public class ModeloImp implements ModeloDao {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void newModelo(Modelo modelo) {
-        entityManager.merge(modelo);
+    public Modelo newModelo(Modelo modelo) {
+        return entityManager.merge(modelo);
+    }
+
+    @Override
+    public List<Modelo> getModelos() {
+        String query = "SELECT m FROM modelo m";
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public Modelo getModeloById(int id) {
+        return entityManager.find(Modelo.class, id);
     }
 }
