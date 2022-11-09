@@ -16,7 +16,9 @@ public class Linea {
     @Getter @Setter @Column(name = "estadoLinea")
     private EstadoDeLinea estadoDeLinea;
 
-    @OneToOne()
+    @OneToOne(mappedBy = "linea")
     @Getter @Setter @JoinColumn(name = "id")
     private OrdenProduccion ordenProduccion;
+
+
 }

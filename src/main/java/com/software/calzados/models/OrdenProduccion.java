@@ -1,6 +1,7 @@
 package com.software.calzados.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -9,7 +10,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "OrdenProduccion")
+
+@Entity(name = "ordenproduccion")
+@Table(name = "ordenproduccion")
 public class OrdenProduccion {
 
 
@@ -28,11 +31,11 @@ public class OrdenProduccion {
     @Getter @Setter @Column(name = "estado")
     private Estado estado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @Getter @Setter @JoinColumn(name = "modelo_id")
     private Modelo modelo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @Getter @Setter @JoinColumn(name = "color_id")
     private Color color;
 
@@ -40,11 +43,12 @@ public class OrdenProduccion {
     @Getter @Setter @JoinColumn(name = "linea_id")
     private Linea linea;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne()
     @JoinColumn(name = "id",nullable = false,insertable=false, updatable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private JornadaLaboral jornadaLaboral;
+
 
 
 }

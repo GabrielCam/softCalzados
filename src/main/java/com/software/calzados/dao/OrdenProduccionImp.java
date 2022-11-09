@@ -22,7 +22,7 @@ public class OrdenProduccionImp implements OrdenProduccionDao {
 
     @Override
     public List<OrdenProduccion> getOrdenProduccion() {
-        String query = "SELECT o FROM OrdenProduccion o";
+        String query = "SELECT o FROM ordenproduccion o";
         return entityManager.createQuery(query).getResultList();
     }
 
