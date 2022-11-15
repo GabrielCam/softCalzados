@@ -23,6 +23,7 @@ public class DefectoController {
            return new ResponseEntity<>(defecto1,HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            // oleee !!
         }
     }
 
