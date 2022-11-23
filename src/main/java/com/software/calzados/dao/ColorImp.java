@@ -23,6 +23,13 @@ public class ColorImp implements ColorDao {
     public List<Color> getColores() {
         return entityManager.createQuery("FROM color").getResultList();
     }
+
+    @Override
+    public Color getColorById(int id) {
+        return entityManager.find(Color.class,id);
+    }
+
+
 }
 
 

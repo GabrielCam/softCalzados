@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api")
@@ -40,4 +41,21 @@ public class ColorController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/color/{id}")
+    public ResponseEntity<Color> getColorById(@PathVariable int id) {
+        try {
+            Optional<Color> color = Optional.ofNullable(colorDao.getColorById(id));
+            if (color.isPresent()) {
+                return new ResponseEntity<>(color.get(),HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
